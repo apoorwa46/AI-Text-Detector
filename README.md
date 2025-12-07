@@ -70,7 +70,7 @@ ai-text-detector/
 
 ### Clone repository:
 ```bash
-git clone https://github.com/<username>/ai-text-detector
+git clone https://github.com/apoorwa46/AI-Text-Detector.git
 cd ai-text-detector
 Install dependencies:
 bash
