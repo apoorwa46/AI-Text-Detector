@@ -1,0 +1,308 @@
+/* ----------------------- GLOBAL RESET ----------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #020b0a;
+    color: #c8ffd9;
+    overflow-x: hidden;
+}
+
+/* ----------------------- ANIMATED MATRIX GRID BG ----------------------- */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-image:
+        linear-gradient(transparent 95%, rgba(0, 255, 92, 0.15)),
+        linear-gradient(90deg, transparent 95%, rgba(0, 255, 92, 0.15));
+    background-size: 45px 45px;
+    animation: gridMove 14s linear infinite;
+    z-index: -10;
+    opacity: 0.25;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(-45px, -45px); }
+}
+
+/* ----------------------- NAVBAR ----------------------- */
+.navbar {
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,255,92,0.04);
+    border-bottom: 1px solid rgba(0,255,92,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00ff5c;
+    text-shadow: 0 0 15px #00ff5c;
+}
+
+.nav-link {
+    padding: 10px 22px;
+    border: 1px solid #00ff5c;
+    color: #00ff5c;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.25s;
+}
+
+.nav-link:hover {
+    background: #00ff5c;
+    color: #011b10;
+    box-shadow: 0 0 20px #00ff5c;
+}
+
+/* ----------------------- HERO SECTION ----------------------- */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 60px 40px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #eaffef;
+    text-shadow: 0 0 20px rgba(0,255,92,0.6);
+}
+
+.glow {
+    color: #00ff5c;
+    text-shadow: 0 0 12px #00ff5c;
+}
+
+.hero-subtitle {
+    margin-top: 18px;
+    font-size: 18px;
+    color: #aef7c4;
+    width: 80%;
+}
+
+@keyframes hoverFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ----------------------- CONTENT AREA ----------------------- */
+.content-area {
+    display: flex;
+    gap: 40px;
+    padding: 0 60px 80px;
+}
+
+/* ----------------------- GLASS PANELS ----------------------- */
+.panel {
+    flex: 1;
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(0,255,92,0.05);
+    border: 1px solid rgba(0,255,92,0.2);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(0,255,92,0.15);
+    transition: 0.3s ease;
+}
+
+.panel:hover {
+    box-shadow: 0 0 40px rgba(0,255,92,0.25);
+}
+
+.panel-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00ff75;
+    margin-bottom: 20px;
+}
+
+/* ----------------------- TEXTAREA + SCAN EFFECT ----------------------- */
+.textarea-wrapper {
+    position: relative;
+}
+
+textarea {
+    width: 100%;
+    height: 210px;
+    padding: 16px;
+    font-size: 16px;
+    background: rgba(0,255,92,0.06);
+    border: 1px solid rgba(0,255,92,0.25);
+    border-radius: 12px;
+    outline: none;
+    color: #d9ffe7;
+    resize: vertical;
+}
+
+textarea:focus {
+    box-shadow: 0 0 15px #00ff75;
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00ff4d, transparent);
+    animation: scanPulse 2s linear infinite;
+}
+
+@keyframes scanPulse {
+    0% { top: 0; opacity: 0.4; }
+    50% { top: 207px; opacity: 1; }
+    100% { top: 0; opacity: 0.4; }
+}
+
+/* ----------------------- BUTTON ----------------------- */
+.scan-btn {
+    margin-top: 18px;
+    padding: 14px 32px;
+    font-size: 18px;
+    font-weight: 700;
+    background: #00ff5c;
+    color: #002414;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(0,255,92,0.4);
+}
+
+.scan-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0,255,92,0.7);
+}
+
+/* ----------------------- EXAMPLES ----------------------- */
+.example-heading {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #89ffb0;
+}
+
+.example-buttons button {
+    margin: 5px 8px 0 0;
+    padding: 10px 14px;
+    font-size: 14px;
+    background: rgba(0,255,92,0.1);
+    border: 1px solid #00ff75;
+    color: #00ff8b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.example-buttons button:hover {
+    background: #00ff75;
+    color: #002a14;
+    box-shadow: 0 0 12px #00ff75;
+}
+
+/* ----------------------- LOADING ----------------------- */
+.loading {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #a2ffc4;
+}
+
+/* ----------------------- RESULT BOX ----------------------- */
+.result-main {
+    font-size: 34px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.result-main.ai {
+    color: #ff5252;
+    text-shadow: 0 0 18px rgba(255,80,80,0.65);
+}
+
+.result-main.human {
+    color: #34ff8a;
+    text-shadow: 0 0 18px rgba(0,255,100,0.65);
+}
+
+.result-sub {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #b8ffce;
+}
+
+/* ----------------------- METER BAR ----------------------- */
+.meter-wrapper {
+    width: 100%;
+    background: rgba(0,255,92,0.07);
+    height: 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,92,0.3);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff3838, #ffa436);
+    width: 0%;
+    transition: width 0.9s ease-in-out;
+}
+
+/* ----------------------- NOTES ----------------------- */
+.tip, .note {
+    margin-top: 14px;
+    color: #caffda;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.warn {
+    color: #ffe680;
+}
+
+/* ----------------------- FOOTER ----------------------- */
+.footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    color: #60ff9e;
+    border-top: 1px solid rgba(0,255,92,0.2);
+}
+
+.footer a {
+    color: #00ff75;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-shadow: 0 0 10px #00ff69;
+}
+
+/* ----------------------- RESPONSIVE ----------------------- */
+@media (max-width: 1000px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image {
+        margin-top: 30px;
+    }
+
+    .content-area {
+        flex-direction: column;
+    }
+}

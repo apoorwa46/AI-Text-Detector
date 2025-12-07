@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>AI Text Detector</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- Animated Hacker Grid Background -->
+    <div class="bg-animation"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <h2 class="logo">⚡ AI Detector</h2>
+        <a href="https://my-portfolio-website-seven-lemon.vercel.app/" class="nav-link" target="_blank">Portfolio</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-left">
+            <h1 class="hero-title">Analyze Text with Neural Accuracy</h1>
+            <p class="hero-subtitle">
+                A next-generation detection engine that identifies whether text resembles 
+                <span class="glow">AI-generated</span> or <span class="glow">human-written</span> patterns.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-area">
+
+        <!-- LEFT PANEL -->
+        <section class="panel glass">
+            <h3 class="panel-title">Enter Text to Analyze</h3>
+
+            <div class="textarea-wrapper">
+                <div class="scan-line"></div>
+                <textarea id="textInput" placeholder="Paste or type your text here..."></textarea>
+            </div>
+
+            <p class="tip">⚠️ Use at least 2–3 sentences for best accuracy</p>
+
+            <button onclick="checkText()" class="scan-btn">🔍 Run AI Scan</button>
+
+            <div class="example-section">
+                <h4 class="example-heading">Try Examples</h4>
+                <div class="example-buttons">
+                    <button onclick="loadExample(1)">AI-like: Explanation</button>
+                    <button onclick="loadExample(2)">Human-like: Story</button>
+                    <button onclick="loadExample(3)">Scientific Style</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL -->
+        <section class="panel glass result-panel">
+            <h3 class="panel-title">Scan Result</h3>
+
+            <div id="loading" class="loading">Scanning neural patterns…</div>
+
+            <div id="resultBox" class="result-box"></div>
+
+            <!-- Percentage Meter -->
+            <div id="meterWrapper" class="meter-wrapper" style="display:none;">
+                <div id="meterFill" class="meter-fill"></div>
+            </div>
+
+            <p class="note">
+                ⚠️ The score reflects writing-pattern similarity.<br />
+                Academic or polished text may appear AI-like.
+            </p>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Built by <b>Apoorwa</b> • 
+        <a href="https://my-portfolio-website-seven-lemon.vercel.app/" target="_blank">Portfolio</a>
+        </p>
+    </footer>
+
+<script>
+/* ---------- Example Loader ---------- */
+function loadExample(id) {
+    const examples = {
+        1: "Artificial intelligence systems are designed to replicate human reasoning through structured neural architectures and pattern-driven learning algorithms.",
+        2: "As I walked through the quiet street, the soft glow of streetlights reflected on the wet pavement, reminding me of calm childhood nights.",
+        3: "Organisms evolve adaptive mechanisms to survive fluctuating environments, incorporating predictive and reactive responses driven by evolutionary pressures."
+    };
+    document.getElementById("textInput").value = examples[id];
+    clearResult();
+}
+
+/* ---------- Clear Result ---------- */
+function clearResult() {
+    document.getElementById("resultBox").innerHTML = "";
+    document.getElementById("meterWrapper").style.display = "none";
+}
+
+/* ---------- Main Detection Logic ---------- */
+async function checkText() {
+    const box = document.getElementById("resultBox");
+    const loading = document.getElementById("loading");
+    const meter = document.getElementById("meterWrapper");
+    const meterFill = document.getElementById("meterFill");
+
+    const text = document.getElementById("textInput").value.trim();
+
+    box.innerHTML = "";
+    meter.style.display = "none";
+
+    if (!text) {
+        box.innerHTML = "<p class='warn'>⚠️ Please enter some text.</p>";
+        return;
+    }
+
+    loading.style.display = "block";
+
+    const response = await fetch("http://127.0.0.1:8000/detect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+    });
+
+    const data = await response.json();
+    loading.style.display = "none";
+
+    // Main Result
+    box.innerHTML = `
+        <p class="result-main ${data.label.includes('AI') ? 'ai' : 'human'}">
+            ${data.label} (${data.probability}%)
+        </p>
+        <p class="result-sub">
+            Higher % → More AI-like patterns<br>
+            Lower % → More human-like qualities
+        </p>
+    `;
+
+    // Meter animation
+    meter.style.display = "block";
+    meterFill.style.width = data.probability + "%";
+}
+</script>
+
+</body>
+</html>
